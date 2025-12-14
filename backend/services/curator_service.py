@@ -85,15 +85,38 @@ class CuratorService:
         
         from openai import OpenAI
         # OpenAI 클라이언트 초기화
-        # 최신 버전에서는 proxies 인자를 명시적으로 전달하지 않으면 환경 변수를 사용하지 않음
+        # 환경 변수에서 proxy 설정이 자동으로 전달되는 것을 방지
+        import os
+        # proxy 관련 환경 변수 임시 저장 및 제거
+        saved_env = {}
+        proxy_vars = ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy', 'ALL_PROXY', 'all_proxy']
+        for var in proxy_vars:
+            if var in os.environ:
+                saved_env[var] = os.environ[var]
+                del os.environ[var]
+        
         try:
+            # OpenAI 클라이언트 초기화
+            # proxies 인자 오류를 방지하기 위해 환경 변수 제거 후 초기화
             client = OpenAI(api_key=self.api_key)
         except TypeError as e:
-            # proxies 인자 오류가 발생하면 명시적으로 None 전달
+            # proxies 인자 오류가 발생하는 경우 (일부 구버전)
             if 'proxies' in str(e):
-                client = OpenAI(api_key=self.api_key, http_client=None)
+                # 환경 변수 제거 후에도 오류가 발생하면, 
+                # OpenAI 라이브러리 버전 문제일 수 있음
+                # 이 경우 기본 인자만 사용
+                try:
+                    # proxies 인자를 명시적으로 None으로 전달 시도
+                    client = OpenAI(api_key=self.api_key, proxies={})
+                except TypeError:
+                    # 그래도 안 되면 api_key만 사용
+                    client = OpenAI(api_key=self.api_key)
             else:
                 raise
+        finally:
+            # 환경 변수 복원
+            for var, value in saved_env.items():
+                os.environ[var] = value
         
         try:
             stream = client.chat.completions.create(
