@@ -25,6 +25,12 @@ class CuratorService:
         self.model_name = model_name or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
         self.data_service = get_data_service()
         self.conversation_history: Dict[str, List[Dict]] = {}  # session_id -> messages
+        
+        # API 키 설정 확인 로그
+        if self.api_key:
+            print(f"OpenAI API 키가 설정되었습니다. 모델: {self.model_name}")
+        else:
+            print("경고: OpenAI API 키가 설정되지 않았습니다. 기본 응답 모드를 사용합니다.")
     
     def _detect_language(self, text: str) -> str:
         """사용자 메시지의 언어 감지
@@ -119,6 +125,7 @@ class CuratorService:
                 os.environ[var] = value
         
         try:
+            print(f"OpenAI API 요청 전송: model={self.model_name}")
             stream = client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
@@ -127,11 +134,16 @@ class CuratorService:
                 max_tokens=1000
             )
             
+            chunk_count = 0
             for chunk in stream:
                 if chunk.choices[0].delta.content:
+                    chunk_count += 1
                     yield chunk.choices[0].delta.content
+            print(f"OpenAI API 응답 완료: {chunk_count}개 청크 수신")
         except Exception as e:
-            raise Exception(f"OpenAI API 호출 실패: {str(e)}")
+            error_msg = f"OpenAI API 호출 실패: {str(e)}"
+            print(error_msg)
+            raise Exception(error_msg)
     
     def _prepare_context(self, artworks: Optional[List[Dict]] = None) -> str:
         """작품 정보와 작가 노트를 기반으로 컨텍스트 구축
@@ -482,6 +494,7 @@ Your name is "Adam".
         # OpenAI API 호출
         if not self.api_key:
             # API 키가 없으면 기본 응답 사용
+            print("OpenAI API 키가 설정되지 않아 기본 응답을 사용합니다.")
             default_response = self._generate_default_response(message, artwork_names)
             full_response = ""
             for char in default_response:
@@ -497,6 +510,7 @@ Your name is "Adam".
         
         try:
             # OpenAI API 스트리밍 호출
+            print(f"OpenAI API 호출 시작: model={self.model_name}, messages={len(messages)}")
             full_response = ""
             for token in self._call_openai_api(messages):
                 full_response += token
