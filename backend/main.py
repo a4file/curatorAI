@@ -27,15 +27,18 @@ try:
     # 방법 1: 프로젝트 루트 기준 절대 import
     from backend.api.conversation import router as conversation_router
     from backend.api.qr import router as qr_router
+    from backend.api.git import router as git_router
 except ImportError:
     try:
         # 방법 2: backend 디렉토리 기준 상대 import
         from api.conversation import router as conversation_router
         from api.qr import router as qr_router
+        from api.git import router as git_router
     except ImportError:
         # 방법 3: 상대 import
         from .api.conversation import router as conversation_router
         from .api.qr import router as qr_router
+        from .api.git import router as git_router
 
 # FastAPI 앱 생성
 app = FastAPI(
@@ -56,6 +59,7 @@ app.add_middleware(
 # API 라우터 등록
 app.include_router(conversation_router)
 app.include_router(qr_router)
+app.include_router(git_router)
 
 # BASE_DIR은 이미 위에서 정의됨
 

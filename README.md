@@ -20,7 +20,15 @@ pip install -r backend/requirements.txt
 
 ### 2. 환경 설정
 
-필요한 경우 `.env` 파일을 생성하여 모델 설정을 변경할 수 있습니다.
+프로젝트 루트 디렉토리에 `.env` 파일을 생성하여 OpenAI API 키를 설정해야 합니다:
+
+```bash
+# .env 파일 생성
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4o-mini
+```
+
+**중요**: `.env` 파일은 Git에 커밋되지 않습니다 (`.gitignore`에 포함됨). 각 개발자는 자신의 API 키를 `.env` 파일에 설정해야 합니다.
 
 ## 실행 방법
 
