@@ -10,6 +10,14 @@ from dotenv import load_dotenv
 # .env 파일 로드
 load_dotenv()
 
+# 환경 변수 확인 로그
+import os
+openai_key = os.getenv("OPENAI_API_KEY", None)
+if openai_key:
+    print(f"[시작] OpenAI API 키가 설정되었습니다. (길이: {len(openai_key)})", flush=True)
+else:
+    print("[시작] 경고: OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.", flush=True)
+
 # 현재 파일의 위치
 _current_file = Path(__file__).resolve()
 _backend_dir = _current_file.parent
