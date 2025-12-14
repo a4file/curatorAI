@@ -1,0 +1,16 @@
+{
+  "session_id": "aabafb5d-a2e1-4398-8b44-06dc980d6395",
+  "timestamp": "20251214_164406",
+  "datetime": "2025-12-14T16:44:06.675616",
+  "messages": [
+    {
+      "role": "user",
+      "content": "안녕"
+    },
+    {
+      "role": "assistant",
+      "content": "'안녕'에 대해 질문해주셨습니다.\n\n현재 전시 중인 주요 작품들:\n- Ascents\n- Atonement1\n- Atonement2\n- Atonement3\n- Atonement4\n\n특정 작품에 대해 질문하시거나, 작가의 의도나 작품의 의미에 대해 알고 싶으시면 말씀해주세요."
+    }
+  ],
+  "metadata": {}
+}

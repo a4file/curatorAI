@@ -1,0 +1,290 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff00;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.terminal-container {
+    width: 100%;
+    max-width: 900px;
+    background: #000000;
+    border: 2px solid #00ff00;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    max-height: 700px;
+}
+
+.terminal-header {
+    background: #001100;
+    padding: 15px 20px;
+    border-bottom: 2px solid #00ff00;
+    text-align: center;
+}
+
+.terminal-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    margin-bottom: 5px;
+}
+
+.terminal-subtitle {
+    font-size: 12px;
+    color: #00aa00;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #000000;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: #001100;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+.terminal-line {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.prompt {
+    color: #00ff00;
+    font-weight: bold;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.output {
+    color: #00ff00;
+}
+
+.output.user {
+    color: #ffff00;
+}
+
+.output.error {
+    color: #ff0000;
+}
+
+.output.thinking {
+    color: #00aaff;
+    font-style: italic;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: #00ff00;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+.terminal-input-area {
+    padding: 15px 20px;
+    background: #001100;
+    border-top: 2px solid #00ff00;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper {
+    flex: 1;
+    position: relative;
+    margin-left: 10px;
+}
+
+.terminal-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #00ff00;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+    padding: 5px;
+}
+
+.autocomplete-list {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background: #001100;
+    border: 1px solid #00ff00;
+    border-bottom: none;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    margin-bottom: 5px;
+}
+
+.autocomplete-list.show {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 8px 12px;
+    color: #00ff00;
+    cursor: pointer;
+    border-bottom: 1px solid #003300;
+    font-size: 13px;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+    background: #003300;
+    color: #ffff00;
+}
+
+.autocomplete-item-name {
+    font-weight: bold;
+}
+
+.autocomplete-item-info {
+    font-size: 11px;
+    color: #00aa00;
+    margin-top: 2px;
+}
+
+.artwork-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px;
+    background: #001100;
+    border: 1px solid #003300;
+    border-radius: 4px;
+}
+
+.artwork-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid #00ff00;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+}
+
+.artwork-image:hover {
+    transform: scale(1.1);
+    border-color: #ffff00;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    z-index: 10;
+    position: relative;
+}
+
+/* 모바일에서 이미지 크기 조정 */
+@media (max-width: 768px) {
+    .artwork-images {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 6px;
+    }
+    
+    .artwork-image {
+        height: 80px;
+    }
+}
+
+.terminal-input::placeholder {
+    color: #005500;
+}
+
+.terminal-input:focus {
+    color: #ffff00;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .terminal-container {
+        height: 95vh;
+        max-height: none;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .terminal-title {
+        font-size: 16px;
+    }
+    
+    .terminal-body {
+        font-size: 12px;
+        padding: 15px;
+    }
+    
+    .terminal-input-area {
+        padding: 12px 15px;
+    }
+}
+
+/* 터미널 깜빡임 효과 */
+.terminal-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0, 255, 0, 0.03) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+

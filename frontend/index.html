@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아담 - 갤러리 큐레이션</title>
+    <link rel="stylesheet" href="/static/css/terminal.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-title">아담 v1.0</div>
+            <div class="terminal-subtitle">갤러리 큐레이션 시스템</div>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line">
+                <span class="prompt">아담></span>
+                <span class="output">안녕하세요. 아담입니다.</span>
+            </div>
+            <div class="terminal-line">
+                <span class="prompt">아담></span>
+                <span class="output">작가의 작품에 대해 궁금한 점을 물어보세요.</span>
+            </div>
+        </div>
+        <div class="terminal-input-area">
+            <span class="prompt">사용자></span>
+            <div class="input-wrapper">
+                <input type="text" id="userInput" class="terminal-input" placeholder="메시지를 입력하세요..." autofocus>
+                <div id="autocompleteList" class="autocomplete-list"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/terminal.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+{
+  "session_id": "9f1db63e-843d-4597-a343-9fd08fd73bfb",
+  "timestamp": "20251214_170735",
+  "datetime": "2025-12-14T17:07:35.895035",
+  "messages": [
+    {
+      "role": "user",
+      "content": "넌 뭐야"
+    },
+    {
+      "role": "assistant",
+      "content": "'넌 뭐야'에 대해 질문해주셨습니다.\n\n이 전시는 곽한승 작가의 작품 전시입니다. 저는 아담입니다.\n\n현재 전시 중인 주요 작품들:\n- Ascents\n- Atonement1\n- Atonement2\n- Atonement3\n- Atonement4\n\n특정 작품에 대해 질문하시거나, 곽한승 작가의 의도나 작품의 의미에 대해 알고 싶으시면 말씀해주세요."
+    }
+  ],
+  "metadata": {}
+}

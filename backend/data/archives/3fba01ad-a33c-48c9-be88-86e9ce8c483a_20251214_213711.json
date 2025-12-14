@@ -1,0 +1,32 @@
+{
+  "session_id": "3fba01ad-a33c-48c9-be88-86e9ce8c483a",
+  "timestamp": "20251214_213711",
+  "datetime": "2025-12-14T21:37:11.380182",
+  "messages": [
+    {
+      "role": "user",
+      "content": "아담의 제작비는 얼마야?"
+    },
+    {
+      "role": "assistant",
+      "content": "신진작가: 100만원부터  \n중견작가: 200만원부터  \nAPI 비용은 별도야."
+    },
+    {
+      "role": "user",
+      "content": "APi 비용은 얼마야?"
+    },
+    {
+      "role": "assistant",
+      "content": "API 비용은 별도로 책정돼. 구체적인 금액은 문의해봐."
+    },
+    {
+      "role": "user",
+      "content": "구마유시 작품 소개"
+    },
+    {
+      "role": "assistant",
+      "content": "곽한승 작품에 대해 궁금한 거 있어? 구체적으로 어떤 작품이 궁금해?"
+    }
+  ],
+  "metadata": {}
+}

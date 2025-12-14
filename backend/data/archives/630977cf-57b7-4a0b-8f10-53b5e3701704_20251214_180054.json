@@ -1,0 +1,24 @@
+{
+  "session_id": "630977cf-57b7-4a0b-8f10-53b5e3701704",
+  "timestamp": "20251214_180054",
+  "datetime": "2025-12-14T18:00:54.213625",
+  "messages": [
+    {
+      "role": "user",
+      "content": "작가명"
+    },
+    {
+      "role": "assistant",
+      "content": "곽한승"
+    },
+    {
+      "role": "user",
+      "content": "전시명"
+    },
+    {
+      "role": "assistant",
+      "content": "'자문자답'"
+    }
+  ],
+  "metadata": {}
+}

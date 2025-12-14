@@ -1,0 +1,16 @@
+{
+  "session_id": "3fba01ad-a33c-48c9-be88-86e9ce8c483a",
+  "timestamp": "20251214_213313",
+  "datetime": "2025-12-14T21:33:13.964687",
+  "messages": [
+    {
+      "role": "user",
+      "content": "아담의 제작비는 얼마야?"
+    },
+    {
+      "role": "assistant",
+      "content": "신진작가: 100만원부터  \n중견작가: 200만원부터  \nAPI 비용은 별도야."
+    }
+  ],
+  "metadata": {}
+}

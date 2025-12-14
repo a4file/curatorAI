@@ -1,0 +1,24 @@
+{
+  "session_id": "2f4f4d04-22f2-443e-a31e-864288885e67",
+  "timestamp": "20251214_172123",
+  "datetime": "2025-12-14T17:21:23.882758",
+  "messages": [
+    {
+      "role": "user",
+      "content": "작가명"
+    },
+    {
+      "role": "assistant",
+      "content": "이 전시의 작가는 곽한승입니다.\n\n저는 아담입니다. 곽한승 작가의 작품과 작가 노트를 바탕으로 큐레이션을 제공하고 있습니다. 작품이나 작가에 대해 궁금한 점이 있으시면 물어보세요."
+    },
+    {
+      "role": "user",
+      "content": "작품소개"
+    },
+    {
+      "role": "assistant",
+      "content": "곽한승 작가의 전시 작품 목록입니다:\n\n- Ascents (22x27, 2025)\n- Atonement1 (42x29.7cm, 2024)\n- Atonement2 (29.7x21cm, 2024)\n- Atonement3 (29.7x21cm, 2024)\n- Atonement4 (29.7x21cm, 2024)\n- Atonement5 (41x32cm, 2024)\n- Atonement6 (41x32cm, 2024)\n- Atonement7 (42x29.7cm, 2024)\n- Atonement8 (42x29.7cm, 2024)\n- Atonement9 (29.7x21cm, 2024)\n- Babel (38x46, 2025)\n- Christmas (41x32cm, 2024)\n- Christmas (41x32cm, 2024)\n- Christmas (41x32cm, 2024)\n- Eve (59.4x84.1cm, 2024)\n\n특정 작품에 대해 더 알고 싶으시면 작품명을 말씀해주세요."
+    }
+  ],
+  "metadata": {}
+}
