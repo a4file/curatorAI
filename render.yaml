@@ -10,6 +10,4 @@ services:
       - key: OPENAI_MODEL
         value: gpt-4o-mini
         required: false
-      - key: PYTHON_VERSION
-        value: 3.11.0
 
