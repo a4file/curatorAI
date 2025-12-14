@@ -28,9 +28,11 @@ class CuratorService:
         
         # API 키 설정 확인 로그
         if self.api_key:
-            print(f"OpenAI API 키가 설정되었습니다. 모델: {self.model_name}")
+            # API 키의 일부만 표시 (보안)
+            api_key_preview = self.api_key[:10] + "..." if len(self.api_key) > 10 else "***"
+            print(f"OpenAI API 키가 설정되었습니다. 모델: {self.model_name}, 키: {api_key_preview}", flush=True)
         else:
-            print("경고: OpenAI API 키가 설정되지 않았습니다. 기본 응답 모드를 사용합니다.")
+            print("경고: OpenAI API 키가 설정되지 않았습니다. 기본 응답 모드를 사용합니다.", flush=True)
     
     def _detect_language(self, text: str) -> str:
         """사용자 메시지의 언어 감지
@@ -314,8 +316,8 @@ class CuratorService:
             return f"인스타 @a4file, 이메일 a4file@kakao.com, 전화 +82)10-9354-4531"
         
         # 일반적인 질문에 대한 응답
-        artwork_list = ", ".join([artwork['name'] for artwork in artworks[:5]])
-        return f"{artwork_list}."
+        # OpenAI API가 없을 때만 사용되는 기본 응답
+        return f"안녕하세요. {artist_name} 작가의 작품에 대해 궁금한 점을 물어보세요. 작품 목록이나 작가 정보를 알려드릴 수 있습니다."
     
     def generate_response(
         self,
