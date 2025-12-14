@@ -30,16 +30,19 @@ class SessionResponse(BaseModel):
 @router.post("/chat", response_class=StreamingResponse)
 async def chat(message_data: ChatMessage):
     """대화 메시지 처리 및 스트리밍 응답"""
+    print(f"[API] /api/chat 호출됨: message={message_data.message[:50]}...")
     curator_service = get_curator_service()
     archiving_service = get_archiving_service()
     
     # 세션 ID 생성 또는 사용
     session_id = message_data.session_id or str(uuid.uuid4())
+    print(f"[API] 세션 ID: {session_id}")
     
     def generate():
         response_text = ""
         image_urls = []
         try:
+            print(f"[API] generate() 시작: message={message_data.message[:50]}...")
             # 메시지에서 작품명 추출하여 이미지 URL 가져오기
             from ..services.data_service import get_data_service
             data_service = get_data_service()
