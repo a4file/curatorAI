@@ -84,7 +84,16 @@ class CuratorService:
             raise Exception("OpenAI API 키가 설정되지 않았습니다.")
         
         from openai import OpenAI
-        client = OpenAI(api_key=self.api_key)
+        # OpenAI 클라이언트 초기화
+        # 최신 버전에서는 proxies 인자를 명시적으로 전달하지 않으면 환경 변수를 사용하지 않음
+        try:
+            client = OpenAI(api_key=self.api_key)
+        except TypeError as e:
+            # proxies 인자 오류가 발생하면 명시적으로 None 전달
+            if 'proxies' in str(e):
+                client = OpenAI(api_key=self.api_key, http_client=None)
+            else:
+                raise
         
         try:
             stream = client.chat.completions.create(
