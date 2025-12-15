@@ -10,13 +10,16 @@ from dotenv import load_dotenv
 # .env 파일 로드
 load_dotenv()
 
-# 환경 변수 확인 로그
+# 환경 변수 확인 로그 (서비스 시작 시 즉시 출력)
 import os
+import sys
 openai_key = os.getenv("OPENAI_API_KEY", None)
 if openai_key:
-    print(f"[시작] OpenAI API 키가 설정되었습니다. (길이: {len(openai_key)})", flush=True)
+    sys.stdout.write(f"[시작] OpenAI API 키가 설정되었습니다. (길이: {len(openai_key)})\n")
+    sys.stdout.flush()
 else:
-    print("[시작] 경고: OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.", flush=True)
+    sys.stdout.write("[시작] 경고: OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.\n")
+    sys.stdout.flush()
 
 # 현재 파일의 위치
 _current_file = Path(__file__).resolve()

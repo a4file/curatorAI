@@ -31,21 +31,23 @@ class SessionResponse(BaseModel):
 async def chat(message_data: ChatMessage):
     """대화 메시지 처리 및 스트리밍 응답"""
     import sys
-    sys.stdout.flush()  # 로그 즉시 출력
-    print(f"[API] /api/chat 호출됨: message={message_data.message[:50]}...", flush=True)
+    sys.stdout.write(f"[API] /api/chat 호출됨: message={message_data.message[:50]}...\n")
+    sys.stdout.flush()
     curator_service = get_curator_service()
     archiving_service = get_archiving_service()
     
     # 세션 ID 생성 또는 사용
     session_id = message_data.session_id or str(uuid.uuid4())
-    print(f"[API] 세션 ID: {session_id}", flush=True)
-    print(f"[API] API 키 설정 여부: {curator_service.api_key is not None}", flush=True)
+    sys.stdout.write(f"[API] 세션 ID: {session_id}\n")
+    sys.stdout.write(f"[API] API 키 설정 여부: {curator_service.api_key is not None}\n")
+    sys.stdout.flush()
     
     def generate():
         response_text = ""
         image_urls = []
         try:
-            print(f"[API] generate() 시작: message={message_data.message[:50]}...", flush=True)
+            sys.stdout.write(f"[API] generate() 시작: message={message_data.message[:50]}...\n")
+            sys.stdout.flush()
             # 메시지에서 작품명 추출하여 이미지 URL 가져오기
             from ..services.data_service import get_data_service
             data_service = get_data_service()
