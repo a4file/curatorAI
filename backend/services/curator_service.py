@@ -93,8 +93,10 @@ class CuratorService:
         
         from openai import OpenAI
         # OpenAI 클라이언트 초기화
-        # 환경 변수에서 proxy 설정이 자동으로 전달되는 것을 방지
+        # proxies 인자 오류를 방지하기 위한 처리
         import os
+        import inspect
+        
         # proxy 관련 환경 변수 임시 저장 및 제거
         saved_env = {}
         proxy_vars = ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy', 'ALL_PROXY', 'all_proxy']
@@ -105,22 +107,30 @@ class CuratorService:
         
         try:
             # OpenAI 클라이언트 초기화
-            # proxies 인자 오류를 방지하기 위해 환경 변수 제거 후 초기화
-            client = OpenAI(api_key=self.api_key)
+            # OpenAI 라이브러리 버전에 따라 proxies 인자 지원 여부가 다름
+            # 최신 버전(1.40.0+)에서는 proxies 인자를 지원하지만, 
+            # 일부 환경에서는 환경 변수에서 자동으로 읽어서 전달하려고 할 수 있음
+            sig = inspect.signature(OpenAI.__init__)
+            init_params = list(sig.parameters.keys())
+            
+            # proxies 인자를 지원하는지 확인
+            if 'proxies' in init_params:
+                # proxies 인자를 명시적으로 None으로 전달
+                client = OpenAI(api_key=self.api_key, proxies=None)
+            else:
+                # proxies 인자를 지원하지 않는 경우 api_key만 전달
+                client = OpenAI(api_key=self.api_key)
         except TypeError as e:
-            # proxies 인자 오류가 발생하는 경우 (일부 구버전)
+            # proxies 인자 오류가 발생하는 경우
             if 'proxies' in str(e):
-                # 환경 변수 제거 후에도 오류가 발생하면, 
-                # OpenAI 라이브러리 버전 문제일 수 있음
-                # 이 경우 기본 인자만 사용
-                try:
-                    # proxies 인자를 명시적으로 None으로 전달 시도
-                    client = OpenAI(api_key=self.api_key, proxies={})
-                except TypeError:
-                    # 그래도 안 되면 api_key만 사용
-                    client = OpenAI(api_key=self.api_key)
+                # proxies 인자를 지원하지 않는 버전이므로 api_key만 사용
+                client = OpenAI(api_key=self.api_key)
             else:
                 raise
+        except Exception as e:
+            # 다른 오류가 발생한 경우
+            print(f"OpenAI 클라이언트 초기화 오류: {e}", flush=True)
+            raise
         finally:
             # 환경 변수 복원
             for var, value in saved_env.items():
